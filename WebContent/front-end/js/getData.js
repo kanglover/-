@@ -68,3 +68,7 @@ function getInfo(columnName) {
 function lookState(id) {
 	 self.location.href="courseDynamic.html?" + id;
 }
+
+function more() {
+	self.location.href="model.html?课程介绍";
+}

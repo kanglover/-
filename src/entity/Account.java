@@ -5,7 +5,7 @@ import annotations.Table;
 
 @Table(name="account", Name="用户")
 public class Account {
-	@Column(isId=true, name="account_id", ChineseName="用户id")
+	@Column(name="account_id", ChineseName="用户id")
 	private String accountId;
 	@Column(name="password", ChineseName="密码")
 	private String password;

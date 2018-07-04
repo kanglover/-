@@ -18,23 +18,18 @@
 				</div>
 				<div class="message_panel">
 					<div class="content_title">
-						<h3>你的问题</h3>
+						<h3 id="h3">你的问题</h3>
 					</div>
 					<div class="content">
 						<textarea id="txtCon" class="txtCon"></textarea>
 					</div>
 					<div style="text-align: right; width: 450px; height: 70px">
 						<button class="submit" onclick="back()">返回</button>
-						<button class="submit" onclick="submit()">提交</button>
+						<button class="submit" id="solveId">提交</button>
 					</div>
 				</div>
 				<div class="problems">其他人的问题</div>
-				<div class="oldMessage" id="messages">
-					<img src="../images/kenan.jpg" class="headPortrait">
-					<div class="oldMessage_content">
-						<div id="content"><span id="name">康康:</span><span id="problem">数据结构是什么</span></div>
-						<div><span id="time">2018-07-01</span> <div class="oper"><span>更多 | </span><span>解疑</span></div></div>
-					</div>
+				<div id = "AllProblems">
 				</div>
 			</div>
 		</div>

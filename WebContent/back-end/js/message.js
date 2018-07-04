@@ -12,9 +12,9 @@ function allMessage(){
 		var tr = document.createElement("tr"); 
 		var str = "";
 		str += '<td><input type="checkbox" name="id" onclick="judgeAll()" value="'+ message[i].id + '" /></td>';
-		str += '<td>' + account[i].name + '</td>';
-		str += '<td>' + account[i].phone + '</td>';
-		str += '<td>' + account[i].email + '</td>';
+		str += '<td>' + account[0].name + '</td>';
+		str += '<td>' + account[0].phone + '</td>';
+		str += '<td>' + account[0].email + '</td>';
 		str += '<td>' + message[i].note + '</td>';
 		str += '<td>' + message[i].time + '</td>';
 		str += '<td><div class="button-group"><a class="button border-green"'; 
@@ -218,9 +218,10 @@ function show(){
 	$("#note").val(message[0].note);
 	var content = "";
 	for(var i = 0; i < reply.length; i++){
-		var replyAccount = JSON.parse(selectAccount(reply[i].account_id));
+		var jsonReplyAccount = selectAccount(reply[i].accountId);
+		var replyAccount = JSON.parse(jsonReplyAccount);
 		content += reply[i].replyTime + " " + replyAccount[0].name + "：\n";
-		content += "    " + reply[i].reply;
+		content += "    " + reply[i].reply + "\n\n";
 	}
 	$("#reply").val(content);
 	$("#time").val(message[0].time);
