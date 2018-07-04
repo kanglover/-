@@ -295,7 +295,6 @@ function DelSelect() {
 
 function changeImg(files){
 	var objUrl = getObjectURL(files.files[0]);
-	console.log("objUrl = " + objUrl);
 	if(objUrl){
 		$("#img0").attr("src",objUrl);
 	}

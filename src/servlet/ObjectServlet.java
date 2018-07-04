@@ -25,11 +25,13 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import annotations.Column;
 import dao.ObjectDao;
+import entity.Account;
 import entity.Article;
 import entity.Course;
 import entity.CourseGroup;
 import entity.Message;
 import entity.Part;
+import entity.Reply;
 import entity.User;
 import net.sf.json.JSONArray;
 
@@ -55,8 +57,8 @@ public class ObjectServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		String method = request.getParameter("method");
 		HashMap<String, String> hashMap = getHashMap(request);
-		String method = hashMap.get("method");
 		String type = hashMap.get("type");
 		switch(method){
 		case "part":
@@ -69,10 +71,10 @@ public class ObjectServlet extends HttpServlet {
 			operation(type, new Course(), hashMap, out);
 			break;
 		case "article":
-			if (type == null) {
+			if(type == null) {
 				hashMap = getPath(request);
 				type = hashMap.get("type");
-			} 
+			}
 			operation(type, new Article(), hashMap, out);
 			break;
 		case "user":
@@ -80,6 +82,16 @@ public class ObjectServlet extends HttpServlet {
 			break;
 		case "message":
 			operation(type, new Message(), hashMap, out);
+			break;
+		case "account":
+			if(type == null) {
+				hashMap = getPath(request);
+				type = hashMap.get("type");
+			}
+			operation(type, new Account(), hashMap, out);
+			break;
+		case "reply":
+			operation(type, new Reply(), hashMap, out);
 			break;
 		}
 	}
@@ -96,7 +108,7 @@ public class ObjectServlet extends HttpServlet {
 		Enumeration<String> enu = request.getParameterNames();
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		while(enu.hasMoreElements()){  
-			String paraName = (String)enu.nextElement(); 
+			String paraName = (String)enu.nextElement();
 			String paravalue = (String)request.getParameter(paraName);
 			hashMap.put(paraName, paravalue);
 		}
@@ -159,7 +171,6 @@ public class ObjectServlet extends HttpServlet {
 		try {
 			List<FileItem> list = (List<FileItem>) upload.parseRequest(request);
 			for (FileItem item : list) {
-				
 				String name = item.getFieldName();
 				if(!name.equals("image")) {
 					String value = (String)item.getString("UTF-8");
@@ -215,7 +226,6 @@ public class ObjectServlet extends HttpServlet {
 
 		String picture = (String) request.getAttribute("image");
 		hashMap.put("image", picture);
-		
 		return hashMap;
 	}
 

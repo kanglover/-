@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: auto;
+	padding: 0;
+	font-family: "宋体";
+}
+
+.contentTrendsMid {
+	overflow: auto;
+}
+
+.contentTrendsMid ul li
+	{
+    margin-top: 10px;
+    margin-left: 40px;
+	list-style: url(../images/list_icon.png);
+}
+
+.time {
+    float: right;
+    margin-right: 30px;
+}

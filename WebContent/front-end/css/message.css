@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+* {
+	margin: auto;
+	padding: 0;
+	font-family: "宋体";
+}
+
+.center {
+	background-color: #f4f8fc;
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	display: flex;
+}
+
+.left {
+	margin-top: 3%;
+	width: 16%;
+	height: 100%;
+}
+
+.nav {
+	width: 90%;
+	height: 40%;
+	text-align: center;
+}
+
+.top_navigation {
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 11%;
+	background-color: #66a2de;
+	border-radius: 5px;
+	box-shadow: 2px 2px 1px #ccc;
+	padding-bottom: 5px;
+}
+
+.left_navigation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 94%;
+	height: 12%;
+	background-color: #cfe3f8;
+	border-bottom: 1px solid white;
+}
+
+.left_navigation:hover {
+	color: #1c5fa3;
+	background-color: #f5f5f5;
+}
+
+.left_navigation:active {
+	color: #1c5fa3;
+	background-color: #f5f5f5;
+}
+
+.right {
+	width: 100%;
+	height: 100%;
+}
+
+.right_top {
+	margin-top: 10px;
+	color: #66a2de;
+	width: 90%;
+	border-bottom: 3px solid #66a2de;
+}
+
+.right_top_right {
+	display: inline;
+	text-align: right;
+}
+
+.right_top_bottom {
+	width: 90%;
+}
+
+h3 {
+	margin-top: 1.8%;
+	margin-bottom: 0.5%;
+}
+
+.message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 55px;
+	background-color: #c3d9ef;
+}
+
+.message_content {
+	width: 96%;
+	height: 63%;
+	background-color: white;
+}
+
+.message_panel {
+	width: 500px;
+	height: 300px;
+	background-color: #f4f8fc;
+	position: absolute;
+	left: 105px;
+	top: 20px;
+	box-shadow: 1px 0px 10px #ccc;
+	display: none;
+	top: 20px;
+}
+
+.content_title {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	border-bottom: 1px solid #ccc;
+}
+
+.content {
+	width: 500px;
+	height: 180px;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #ccc;
+}
+
+.txtCon {
+	width: 440px;
+	height: 120px;
+	outline: none;
+	padding: 5px;
+}
+
+.submit {
+	margin-top: 17px;
+	font-size: 18px;
+	width: 75px;
+	height: 35px;
+	border: none;
+	background-color: #c3d9ef;
+	color: #ffffff;
+}
+
+.oldMessage {
+	width: 100%;
+	height: 1%;
+}
+
+.headPortrait {
+	float: left;
+	width: 35px;
+	height: 34px;
+	border-radius: 50%;
+}
+
+.oldMessage_content {
+	margin-left: 50px;
+	height: 46px;
+}
+
+.message_content img {
+	margin-top: 5px;
+	vertical-align: sub;
+	margin-left: 10px;
+	width: 24px;
+	height: 24px;
+}
+
+.problems {
+	margin-top: 25px;
+	border-bottom: 1px solid #ccc;
+}
+
+.oldMessage {
+	margin-top: 25px;
+	border-bottom: 1px solid #ccc;
+}
+
+#name {
+	color: blue;
+}
+
+.oper {
+	float: right;
+}

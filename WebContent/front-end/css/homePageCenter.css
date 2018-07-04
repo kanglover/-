@@ -96,7 +96,8 @@ body {
 	height: 190px;
 }
 
-.midContent .midHead .midHeadLeft .subjectIntroduce .contentIntroduce .contentIntroduceLeft {
+.midContent .midHead .midHeadLeft .subjectIntroduce .contentIntroduce .contentIntroduceLeft
+	{
 	position: relative;
 	left: 0px;
 	top: 0px;
@@ -106,17 +107,18 @@ body {
 	text-indent: 17px;
 }
 
-.midContent .midHead .midHeadLeft .subjectIntroduce .contentIntroduce .contentIntroduceRight {
+.midContent .midHead .midHeadLeft .subjectIntroduce .contentIntroduce .contentIntroduceRight
+	{
 	position: relative;
-    right: 0px;
-    top: 0px;
-    width: 532px;
-    height: 164px;
-    float: left;
-    line-height: 15px;
-    padding-left: 10px;
-    text-indent: 25px;
-    text-align: justify;
+	right: 0px;
+	top: 0px;
+	width: 532px;
+	height: 164px;
+	float: left;
+	line-height: 15px;
+	padding-left: 10px;
+	text-indent: 25px;
+	text-align: justify;
 }
 
 .midContent .midHead .midHeadRight .subjectPrincipal {
@@ -164,7 +166,7 @@ body {
 	float: left;
 	line-height: 15px;
 	padding-left: 10px;
-	text-indent: 17px;
+	text-indent: 25px;
 	text-align: justify;
 }
 
@@ -223,7 +225,7 @@ body {
 	{
 	position: relative;
 	top: 0px;
-	left: 350px;
+	left: 340px;
 	width: 31px;
 	height: 7px;
 }
@@ -244,16 +246,14 @@ body {
 
 .midContent .midMid .midMidLeft .subjectTrends .subjectTrendsMid .contentTrendsMid ul
 	{
-	position: relative;
-	margin-top: 0px;
-	left: -37px;
-	line-height: 15px;
-	list-style: none;
+	
 }
 
 .midContent .midMid .midMidLeft .subjectTrends .subjectTrendsMid .contentTrendsMid ul li
 	{
 	margin-top: 5px;
+	margin-left: -30px;
+	list-style: url(../images/list_icon.png);
 }
 
 .midContent .midMid .midMidLeft .subjectTrends .subjectTrendsMid .contentTrendsMid ul li a
@@ -272,8 +272,7 @@ body {
 
 .midContent .midMid .midMidLeft .subjectTrends .subjectTrendsMid .contentTrendsMid ul li .time
 	{
-	position: relative;
-	left: 210px;
+	float: right;
 }
 
 .midContent .midMid .midMidLeft .subjectTrends .subjectTrendsMid .midMidHr
@@ -340,6 +339,8 @@ body {
 	position: relative;
 	top: 15px;
 	border: 1px solid #d7d4d4;
+	height: 150px;
+	margin-right: 19px;
 }
 
 .midContent .midMid .midMidRight .studySource .studySourceMid .midMidHr
@@ -435,7 +436,7 @@ body {
 .midContent .midFoot .midFootMain .midFootContent .midFootContentMid .midContentImg ul li img
 	{
 	height: 140px;
-	width: 190px;
+	width: 150px;
 }
 
 .midContent .friendShipConnection .friendShipTitle {

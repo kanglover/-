@@ -3,9 +3,9 @@ package entity;
 import annotations.Column;
 import annotations.Table;
 
-@Table(name="user", Name="用户")
+@Table(name="user", Name="管理员")
 public class User {
-	@Column(isId=true, name="id", ChineseName="用户id")
+	@Column(isId=true, name="id", ChineseName="管理员id")
 	private String id;
 	@Column(name="password", ChineseName="密码")
 	private String password;

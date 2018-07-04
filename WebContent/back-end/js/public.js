@@ -22,9 +22,6 @@ function treeSearch(seacrchInfo) {
 	for (var i = 0; i < serachArray.length; i++) {//隐藏不满足搜索的行
 		rows[serachArray[i]].style.display = 'none';
 	}
-	
-	//分页
-	exhibition();
 }
 
 //搜索

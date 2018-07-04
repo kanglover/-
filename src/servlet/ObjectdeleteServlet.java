@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import annotations.Column;
 import dao.ObjectDao;
+import entity.Account;
 import entity.Article;
 import entity.Course;
 import entity.CourseGroup;
 import entity.Message;
 import entity.Part;
+import entity.Reply;
 import entity.User;
 
 /**
@@ -70,6 +72,14 @@ public class ObjectdeleteServlet extends HttpServlet {
 			case "message":
 				Message message = new Message();
 				falg = delete(ids, message);
+				break;
+			case "account":
+				Account account = new Account();
+				falg = delete(ids, account);
+				break;
+			case "reply":
+				Reply reply = new Reply();
+				falg = delete(ids, reply);
 				break;
 			}
 		}

@@ -2,67 +2,132 @@
  * 
  */
 
-var all = "";
 function allMessage(){
+	var all = selectMessage();
+	var message = JSON.parse(all);
+	var flag = document.createDocumentFragment();
+	for (var i = 0; i < message.length; i++) {
+		var jsonAccount = selectAccount(message[i].account_id);
+		var account = JSON.parse(jsonAccount);
+		var tr = document.createElement("tr"); 
+		var str = "";
+		str += '<td><input type="checkbox" name="id" onclick="judgeAll()" value="'+ message[i].id + '" /></td>';
+		str += '<td>' + account[i].name + '</td>';
+		str += '<td>' + account[i].phone + '</td>';
+		str += '<td>' + account[i].email + '</td>';
+		str += '<td>' + message[i].note + '</td>';
+		str += '<td>' + message[i].time + '</td>';
+		str += '<td><div class="button-group"><a class="button border-green"'; 
+		str +=	' onclick="view('+ message[i].id +')"><span class="icon-search"></span> 查看</a>';
+		str += '<a class="button border-red" href="javascript:void(0)"'; 
+		str +=	' onclick="del(this, '+ message[i].id +')"><span class="icon-trash-o"></span>删除</a></div></td>';
+		tr.innerHTML = str;
+		flag.appendChild(tr);
+		
+		exhibition();
+	}
+	document.getElementById("tbody").appendChild(flag);
+
+	//分页
+	exhibition();
+}
+
+function selectAccount(account_id){
+	var account;
 	$.ajax({
 		type:"post",
-		url:"../../ObjectServlet?method=message",
-		async:true,
+		url:"../../ObjectServlet?method=account",
+		async:false,
 		data:{
 			"type":"select",
+			"account_id": account_id,
 		},
 		success:function(data){
-			all = data;
-			var arry = JSON.parse(data);
-			var flag = document.createDocumentFragment();
-			for (var i = 0; i < arry.length; i++) {
-				var tr = document.createElement("tr"); 
-				var str = "";
-				str += '<td><input type="checkbox" name="id" onclick="judgeAll()" value="'+ arry[i].id + '" /></td>';
-				str += '<td>' + arry[i].name + '</td>';
-				str += '<td>' + arry[i].phone + '</td>';
-				str += '<td>' + arry[i].email + '</td>';
-				str += '<td>' + arry[i].note + '</td>';
-				str += '<td>' + arry[i].time + '</td>';
-				str += '<td><div class="button-group"><a class="button border-green"'; 
-				str +=	' onclick="view('+ i +')"><span class="icon-search"></span> 查看</a>';
-				str += '<a class="button border-red" href="javascript:void(0)"'; 
-				str +=	' onclick="del(this, '+ arry[i].id +')"><span class="icon-trash-o"></span>删除</a></div></td>';
-				tr.innerHTML = str;
-				flag.appendChild(tr);
-				
-				exhibition();
-			}
-			document.getElementById("tbody").appendChild(flag);
-			
-			//分页
-			exhibition();
+			account = data;
 		},
 		error:function(data){
 
 		}
 	})
+	return account;
+}
+
+function selectReply(messageId){
+	$.ajax({
+		type:"post",
+		url:"../../ObjectServlet?method=reply",
+		async:false,
+		data:{
+			"type":"select",
+			"message_id":messageId,
+		},
+		success:function(data){
+			reply = data;
+		},
+		error:function(data){
+		}
+	})
+	return reply;
+}
+
+function selectMessage(){
+	var all = "";
+	$.ajax({
+		type:"post",
+		url:"../../ObjectServlet?method=message",
+		async:false,
+		data:{
+			"type":"select",
+		},
+		success:function(data){
+			all = data;
+		},
+		error:function(data){
+
+		}
+	})
+	return all;
 }
 
 function del(row,id) {
 	if (confirm("您确定要删除吗?")) {
-		$.ajax({
-			type:"post",
-			url:"../../ObjectServlet?method=message",
-			async:true,
-			data:{
-				"type":"delete",
-				"id": id
-			},
-			success:function(data){
-				$(row).parent().parent().parent().remove();
-				exhibition();
-			},
-			error:function(data){
-
-			}
-		})
+		delReply(id);
+		delMessage(row, id);
+		exhibition();
 	}
+}
+
+function delMessage(row, id){
+	$.ajax({
+		type:"post",
+		url:"../../ObjectServlet?method=message",
+		async:true,
+		data:{
+			"type":"delete",
+			"id": id
+		},
+		success:function(data){
+			$(row).parent().parent().parent().remove();
+		},
+		error:function(data){
+		}
+	})
+}
+
+function delReply(id){
+	$.ajax({
+		type:"post",
+		url:"../../ObjectServlet?method=reply",
+		async:true,
+		data:{
+			"type":"delete",
+			"message_id": id
+		},
+		success:function(data){
+		},
+		error:function(data){
+		}
+	})
 }
 
 function judgeAll(){
@@ -77,23 +142,6 @@ function judgeAll(){
 		$("#checkall").prop("checked", falg);
 	}else{
 		$("#checkall").prop("checked", falg);
-	}
-}
-
-function DelSelect() {
-	var Checkbox = false;
-	$("input[name='id']").each(function() {
-		if (this.checked == true) {
-			Checkbox = true;
-		}
-	});
-	if (Checkbox) {
-		var t = confirm("您确认要删除选中的内容吗？");
-		if (t == false)
-			return false;
-	} else {
-		alert("请选择您要删除的内容!");
-		return false;
 	}
 }
 
@@ -124,43 +172,58 @@ function DelSelect() {
 		alert("选择你需要删除的项");
 	} else {
 		if (confirm("您确定要删除吗?")) {
-			$.ajax({
-				url:"../../ObjectdeleteServlet?method=message",
-				type: "post",
-				data:{
-					id: ""+WnoArray,
-				},
-				success: function() {
-					alert("删除成功");
-					for(var i = 0; i < rowArray.length; i++){
-						document.getElementById('tbody').deleteRow(rowArray[i] - i);
-					}
-					$("#checkall").prop("checked", false);
-					exhibition();
-				},
-			});
+			delAllMessage(WnoArray, rowArray);
 		}
 	}
 } 
 
-function view(i){
-	var data = JSON.parse(all);
-	var arry = JSON.stringify(data[i]);
-	sessionStorage.setItem('data', arry);
-	location.href = "../html/messageShow.html";
+function delAllMessage(WnoArray, rowArray){
+//	for(var i = 0; i < WnoArray.length; i++){
+//		delReply(WnoArray[i]);
+//	}
+	$.ajax({
+		url:"../../ObjectdeleteServlet?method=message",
+		type: "post",
+		data:{
+			id: ""+WnoArray,
+		},
+		success: function() {
+			alert("删除成功");
+			for(var i = 0; i < rowArray.length; i++){
+				document.getElementById('tbody').deleteRow(rowArray[i] - i);
+			}
+			$("#checkall").prop("checked", false);
+		},
+	});
+	exhibition();
+}
+
+function view(id){
+	location.href = "../html/messageShow.html?" + id;
 }
 
 function show(){
-	var data = sessionStorage.getItem('data');
-	sessionStorage.removeItem('data');
-	var arr = JSON.parse(data);
-	$("#name").val(arr.name);
-	$("#phone").val(arr.phone);
-	$("#email").val(arr.email);
-	$("#content").val(arr.content);
-	$("#note").val(arr.note);
-	$("#reply").val(arr.reply);
-	$("#time").val(arr.time);
+	var url = location.search;
+	var index = url.indexOf("?");
+	var jsonMessage = selectMessage(url.substring(index + 1));
+    var message = JSON.parse(jsonMessage);
+    var jsaonAccount = selectAccount(message[0].account_id);
+    var jsonReply = selectReply(message[0].id);
+	var account = JSON.parse(jsaonAccount);
+	var reply = JSON.parse(jsonReply);
+	$("#name").val(account[0].name);
+	$("#phone").val(account[0].phone);
+	$("#email").val(account[0].email);
+	$("#content").val(message[0].content);
+	$("#note").val(message[0].note);
+	var content = "";
+	for(var i = 0; i < reply.length; i++){
+		var replyAccount = JSON.parse(selectAccount(reply[i].account_id));
+		content += reply[i].replyTime + " " + replyAccount[0].name + "：\n";
+		content += "    " + reply[i].reply;
+	}
+	$("#reply").val(content);
+	$("#time").val(message[0].time);
 	$("input,textarea").attr("disabled", "true");
 	$("input,textarea").css("background","white");
 	$("input,textarea").css("border","none");

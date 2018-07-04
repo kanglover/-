@@ -3,11 +3,12 @@
 * {
 	margin: auto;
 	padding: 0;
+	font-family: "宋体";
 }
 
 .content {
 	background-color: #f4f8fc; /*#f4f8fc;*/
-	width: 63%;
+	width: 960px;
 	height: 776px;
 	display: flex;
 	flex-wrap: nowrap;
@@ -43,7 +44,7 @@
 	justify-content: center;
 	color: black;
 	width: 94%;
-	height: 12%;
+	height: 35px;
 	background-color: #cfe3f8;
 	border-bottom: 1px solid white;
 }
@@ -67,7 +68,6 @@
 
 .right-top {
 	margin-top: 25px;
-	color: #66a2de;
 	width: 95%;
 	height: 4%;
 	border-bottom: 2px solid #66a2da;
@@ -85,5 +85,17 @@
 	margin-top: 10px;
 	width: 90%;
 	height: 80%;
-	display: none;
+	overflow: auto;
+}
+
+.right-content p {
+	text-align: justify;
+	text-indent: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	margin-right: 15px
+}
+
+::-webkit-scrollbar {
+	width: 0px
 }
